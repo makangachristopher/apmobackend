@@ -1,0 +1,183 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Sermon Artifacts</h1>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="">
+    <h3>All categories</h3>
+    <a class="button-primary" href="{% url 'create_category' %}">Add A New Category</a>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th class="table-responsive">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>
+                    {{ category.name }}
+                    <div class="table-show-mobile">
+                        Description: {{ category.description }} <br>
+                        <div class="table-actions">
+                            <a href="{% url 'edit_category' category.id %}" class="edit-button">Edit</a>
+                            <a href="{% url 'delete_category' category.id %}" class="delete-button">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">{{ category.description }}</td>
+                <td class="table-actions table-responsive">
+                    <a href="{% url 'edit_category' category.id %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_category' category.id %}" class="delete-button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Preachers -->
+    <h3>All Preachers</h3>
+    <a class="button-preacher" href="{% url 'create_preacher' %}">Add A New Preacher</a>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Profile Picture</th>
+                <th>Name</th>
+                <th>Bio</th>
+                <th>Social Links</th>
+                <th class="table-responsive">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for preacher in preachers %}
+            <tr>
+                <!-- Profile Picture -->
+                <td>
+                    {% if preacher.profile_picture %}
+                        <img src="{{ preacher.profile_picture.url }}" alt="{{ preacher.name }}" width="100" height="100" style="border-radius: 50%;">
+                    {% else %}
+                        <img src="{% static 'images/user.png' %}" alt="Default Profile" width="100" height="100">
+                    {% endif %}
+                </td>
+                <td>
+                    {{ preacher.name }}
+                    <div class="table-show-mobile">
+                        Bio: {{ preacher.bio }} <br>
+                        {% if preacher.social_links %}
+                            Social Links:
+                            <ul>
+                                {% for platform, link in preacher.social_links.items %}
+                                    <li><a href="{{ link }}" target="_blank">{{ platform|capfirst }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span>No social links available</span>
+                        {% endif %}
+                        <div class="table-actions">
+                            <a href="{% url 'edit_preacher' preacher.id %}" class="edit-button">Edit</a>
+                            <a href="{% url 'delete_preacher' preacher.id %}" class="delete-button">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">{{ preacher.bio }}</td>
+                <td class="table-responsive">
+                    {% if preacher.social_links %}
+                        <ul>
+                            {% for platform, link in preacher.social_links.items %}
+                                <li><a href="{{ link }}" target="_blank">{{ platform|capfirst }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span>No social links available</span>
+                    {% endif %}
+                </td>
+                <!-- Actions -->
+                <td class="table-actions table-responsive">
+                    <a href="{% url 'edit_preacher' preacher.id %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_preacher' preacher.id %}" class="delete-button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <!-- Playlists -->
+    <h3>All Playlists</h3>
+    <a class="button-primary" href="{% url 'create_playlist' %}">Add A New Playlist</a>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th class="table-responsive">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for playlist in playlists %}
+            <tr>
+                <td>
+                    {{ playlist.name }}
+                    <div class="table-show-mobile">
+                        Description: {{ playlist.description }} <br>
+                        <div class="table-actions">
+                            <a href="{%  url 'edit_playlist' playlist.id %}" class="edit-button">Edit</a>
+                            <a href="{% url 'delete_playlist' playlist.id %}" class="delete-button">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">{{ playlist.description }}</td>
+                <td class="table-actions table-responsive">
+                    <a href="{%  url 'edit_playlist' playlist.id %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_playlist' playlist.id %}" class="delete-button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+<!-- Floating Action Button 
+<div class="fab-wrapper">
+    <div class="fab-container">
+        <div class="fab shadow">
+        <div class="fab-content">
+            <span class="material-icons">support_agent</span>
+        </div>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">phone</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">mail_outline</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">language</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">help_outline</span>
+        </a>
+        </div>
+    </div>
+</div>-->
+
+{% endblock%}

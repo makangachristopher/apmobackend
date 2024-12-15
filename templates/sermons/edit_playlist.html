@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Update Playlist</h3>
+        <form method="post" action="{% url 'edit_playlist' playlist.id %}">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="playlist-name">Name: </label>
+                <input value="{{ playlist.name }}" class="input" id="playlist-name" name="name" type="text" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="playlist-description">Description: </label>
+                <textarea class="input" id="playlist-description" name="description">{{ playlist.description }}</textarea>
+            </div>
+            <button class="submit-button">
+                Update Playlist
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

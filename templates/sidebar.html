@@ -1,0 +1,29 @@
+{% load static %}
+
+<nav class="sidebar sidebar-responsive">
+    <div class="sidebar-link-container sidebar-link-home">
+        <a href="{% url 'home' %}" class="sidebar-link">
+            <img class="sidebar-image" alt="home" src="{% static 'images/home.png' %}" />
+        </a>
+        <span class="sidebar-tooltip-home tooltip">Home</span>
+    </div>
+    <div class="sidebar-link-container sidebar-link-books">
+        <a href="{% url 'categories' %}" class="sidebar-link">
+            <img class="sidebar-image" alt="categories" src="{% static 'images/app.png' %}" />
+        </a>
+        <span class="sidebar-tooltip-books tooltip">Artifacts</span>
+    </div>
+    <div class="sidebar-link-container sidebar-link-fines">
+        <a class="sidebar-link" href="">
+            <img class="sidebar-image" alt="fines" src="{% static 'images/profile.png' %}" />
+        </a>
+        <span class="tooltip sidebar-tooltip-fines">Users</span>
+    </div>
+
+    <div class="sidebar-link-container sidebar-link-logout">
+        <a class="sidebar-link" href="{% url 'logout' %}">
+            <img class="sidebar-image" alt="fines" src="{% static 'images/logout.png' %}" />
+        </a>
+        <span class="tooltip sidebar-tooltip-logout">Logout</span>
+    </div>
+</nav>

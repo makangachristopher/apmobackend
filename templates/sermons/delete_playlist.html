@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="center">
+    <div class="books-form delete-form-container">
+        <h3>Are you sure you want to delete {{ playlist.name }} ? </h3>
+        <h4><strong>Note:</strong> Deleting a playlist can lead to deletion of some sermons</h4>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="delete-button-container">
+                <a href="{{ request.META.HTTP_REFERER }}" class="edit-button">Go Back</a>
+                <button class="delete-button">Delete Playlist</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

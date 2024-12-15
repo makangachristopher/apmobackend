@@ -1,0 +1,103 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Add A New Sermon</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Title Field -->
+            <div class="input-containter">
+                <label class="input-label" for="title">Title: </label>
+                <input class="input" id="title" name="title" type="text" required />
+            </div>
+
+            <!-- Preacher Field -->
+            <div class="input-containter">
+                <label class="input-label" for="preacher">Preacher: </label>
+                <select class="input" id="preacher" name="preacher" required>
+                    {% for preacher in preachers %}
+                    <option value="{{ preacher.id }}">{{ preacher.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Duration Field -->
+            <div class="input-containter">
+                <label class="input-label" for="duration">Duration (HH:MM:SS): </label>
+                <input class="input" id="duration" name="duration" type="text" placeholder="HH:MM:SS" required />
+            </div>
+
+            <!-- Date Published Field -->
+            <div class="input-containter">
+                <label class="input-label" for="date_published">Date Published: </label>
+                <input class="input" id="date_published" name="date_published" type="date" required />
+            </div>
+
+            <!-- Audio File URL Field -->
+            <div class="input-containter">
+                <label class="input-label" for="audio_file_url">Audio File URL: </label>
+                <input class="input" id="audio_file_url" name="audio_file_url" type="url" required />
+            </div>
+
+            <!-- Description Field -->
+            <div class="input-containter">
+                <label class="input-label" for="description">Description: </label>
+                <textarea class="input" id="description" name="description" required></textarea>
+            </div>
+
+            <!-- Topic Field -->
+            <div class="input-containter">
+                <label class="input-label" for="topic">Topic: </label>
+                <input class="input" id="topic" name="topic" type="text" required />
+            </div>
+
+            <!-- Category Field -->
+            <div class="input-containter">
+                <label class="input-label" for="category">Category: </label>
+                <select class="input" id="category" name="category" required>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Playlists Field -->
+            <div class="input-containter">
+                <label class="input-label" for="playlists">Playlists: </label>
+                <select class="input" id="playlists" name="playlists" required>
+                    {% for playlist in playlists %}
+                    <option value="{{ playlist.id }}">{{ playlist.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Tags Field -->
+            <div class="input-containter">
+                <label class="input-label" for="tags">Tags (Comma-separated): </label>
+                <input class="input" id="tags" name="tags" type="text" />
+            </div>
+
+            <!-- Language Field -->
+            <div class="input-containter">
+                <label class="input-label" for="language">Language: </label>
+                <input class="input" id="language" name="language" type="text" required />
+            </div>
+
+            <!-- Background Image Field -->
+            <div class="input-containter">
+                <label class="input-label" for="bg_picture">Background Image: </label>
+                <input class="input" id="bg_picture" name="bg_picture" type="file" />
+            </div>
+
+            <!-- Hidden Fields for play_count and likes_count -->
+            <input type="hidden" name="play_count" value="0" />
+            <input type="hidden" name="likes_count" value="0" />
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

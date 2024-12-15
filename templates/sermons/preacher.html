@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="">
+    <h3>All Categories</h3>
+    <a class="button-primary" href="{% url 'create_category' %}">Add A New Category</a>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th class="table-responsive">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>
+                    {{ category.name }}
+                    <div class="table-show-mobile">
+                        Description: {{ category.description }} <br>
+                        <div class="table-actions">
+                            <a href="" class="edit-button">Edit</a>
+                            <a href="" class="delete-button">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">{{ category.description }}</td>
+                <td class="table-actions table-responsive">
+                    <a href="" class="edit-button">Edit</a>
+                    <a href="" class="delete-button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock%}

@@ -1,0 +1,142 @@
+
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<h3>Welcome {{ request.user }}</h3>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="alert">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="GET" action="" class="nav-search nav-search-mobile">
+    <input value="{{ q }}" name="q" class="nav-search-input" type="text" placeholder="Search for books">
+    <button class="nav-search-button" type="submit">Search</button>
+</form>
+
+<div class="dashboard-card-container">
+    <div class="dashboard-card">
+        <h1>{{total_sermons}}</h1>
+        <p>Total Sermon(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>{{total_audio_sermons}}</h1>
+        <p>Total Audio(s)</p>
+    </div>
+    <div class="dashboard-card">
+        <h1>0</h1>
+        <p>Total Video(s)</p>
+    </div>
+</div>
+
+
+<div class="">
+    <h3>All Sermons</h3>
+    <a class="button-primary" href="{% url 'create_sermon' %}">Add A New Sermon</a>
+    <table class="books-table-container">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Playlist</th>
+                <th>Category</th>
+                <th>Preacher</th>
+                <th>Date Published</th>
+                <th>Duration</th>
+                <th class="table-responsive">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sermon in sermons %}
+            <tr>
+                <td>
+                    {% if sermon.bg_picture %}
+                        <img src="{{ sermon.bg_picture.url }}" alt="{{ sermon.title }}" width="100" height="100" style="border-radius: 50%;">
+                    {% else %}
+                        <img src="{% static 'user.png' %}" alt="Default Profile" width="100" height="100" style="border-radius: 50%;">
+                    {% endif %}
+                </td>
+                <td>
+                    {{ sermon.title }}
+                    <div class="table-show-mobile">
+                        Playlist: 
+                        {% for playlist in sermon.playlists.all %}
+                            {{ playlist.name }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            No playlist
+                        {% endfor %}
+                        <br>
+                        Category: {{ sermon.category.name }} <br>
+                        Preacher: {{ sermon.preacher.name }} <br>
+                        Date Published: {{ sermon.date_published }} <br>
+                        Duration: {{ sermon.duration }}
+                        <div class="table-actions">
+                            <a href="{% url 'edit_sermon' sermon.id %}" class="edit-button">Edit</a>
+                            <a href="{% url 'delete_sermon' sermon.id %}" class="delete-button">Delete</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="table-responsive">
+                    {% for playlist in sermon.playlists.all %}
+                        <p>{{ playlist.name }}</p>
+                    {% empty %}
+                        <p>No playlist</p>
+                    {% endfor %}
+                </td>
+                <td class="table-responsive">{{ sermon.category.name }}</td>
+                <td class="table-responsive">{{ sermon.preacher.name }}</td>
+                <td class="table-responsive">{{ sermon.date_published }}</td>
+                <td class="table-responsive">{{ sermon.duration }}</td>
+                <td class="table-actions table-responsive">
+                    <a href="{% url 'edit_sermon' sermon.id %}" class="edit-button">Edit</a>
+                    <a href="{% url 'delete_sermon' sermon.id %}" class="delete-button">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No sermons found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<!-- Floating Action Button 
+<div class="fab-wrapper">
+    <div class="fab-container">
+        <div class="fab shadow">
+        <div class="fab-content">
+            <span class="material-icons">support_agent</span>
+        </div>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">phone</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">mail_outline</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">language</span>
+        </a>
+        </div>
+        <div class="sub-button shadow">
+        <a href="google.com" target="_blank">
+            <span class="material-icons">help_outline</span>
+        </a>
+        </div>
+    </div>
+</div>-->
+
+{% endblock%}

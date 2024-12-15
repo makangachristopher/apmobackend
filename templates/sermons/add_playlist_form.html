@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Add A New Playlist</h3>
+        <form method="post" action="">
+            {% csrf_token %}
+
+            <div class="input-containter">
+                <label class="input-label" for="name">Name:</label>
+                <input class="input" id="name" name="name" type="text" />
+            </div>
+
+            <div class="input-containter">
+                <label class="input-label" for="description">Description:</label>
+                <textarea class="input" id="description" name="description"></textarea>
+            </div>
+
+            <button>
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

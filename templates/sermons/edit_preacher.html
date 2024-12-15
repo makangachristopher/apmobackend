@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        {% if preacher.profile_picture %}
+        <div style="text-align: center;">
+            <p>
+                <img src="{{ preacher.profile_picture.url }}" alt="Profile Picture" height="200" style="border-radius: 20%;"/>
+            </p>
+        </div>
+        {% endif %}
+        <h3 class="books-form-header">Update Preacher</h3>
+        <form method="post" action="{% url 'edit_preacher' preacher.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-containter">
+                <label class="input-label" for="preacher-name">Name: </label>
+                <input value="{{ preacher.name }}" class="input" id="preacher-name" name="name" type="text" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="preacher-bio">Bio: </label>
+                <textarea class="input" id="preacher-bio" name="bio">{{ preacher.bio }}</textarea>
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="profile-picture">Profile Picture: </label>
+                <input class="input" id="profile-picture" name="profile_picture" type="file" />
+            </div>
+            <div class="input-containter">
+                <label class="input-label" for="preacher-social-links">Social Links: </label>
+                <textarea class="input" id="preacher-social-links" name="social_links">{{ preacher.social_links }}</textarea>
+            </div>
+            <button class="submit-button">
+                Update Preacher
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

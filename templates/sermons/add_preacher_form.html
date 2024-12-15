@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="center">
+    <div class="form-container books-form">
+        <h3 class="books-form-header">Add A New Preacher</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Name Field -->
+            <div class="input-containter">
+                <label class="input-label" for="name">Name: </label>
+                <input class="input" id="name" name="name" type="text"required />
+            </div>
+
+            <!-- Bio Field -->
+            <div class="input-containter">
+                <label class="input-label" for="bio">Bio: </label>
+                <textarea class="input" id="bio" name="bio" required></textarea>
+            </div>
+
+            <!-- Profile Picture Field -->
+            <div class="input-containter">
+                <label class="input-label" for="profile_picture">Profile Picture: </label>
+                <input class="input" id="profile_picture" name="profile_picture" type="file" />
+            </div>
+
+            <!-- Social Links Field -->
+            <div class="input-containter">
+                <label class="input-label" for="social_links">Social Links (optional): </label>
+                <textarea class="input" id="social_links" name="social_links"></textarea>
+                <small>Enter social media URLs separated by commas (e.g., Facebook, Twitter)</small>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

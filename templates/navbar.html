@@ -1,0 +1,18 @@
+{% load static %}
+
+<nav class="navbar">
+    <div class="nav-logo-search">
+        <a href="" class="navbar-brand">
+            <img class="navbar-image" src="{% static 'images/church.png' %}" alt="">
+            <span>Apmo Sermons</span>
+        </a>
+        <form method="GET" action="" class="nav-search nav-search-responsive">
+            <input value="{{ q }}" name="q" class="nav-search-input" type="text" placeholder="Search for sermons">
+            <button class="nav-search-button" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="nav-user-profile">
+        <span>{{ request.user }}</span>
+        <img class="navbar-image" src="{% static 'images/user.png' %}" alt="">
+    </div>
+</nav>
