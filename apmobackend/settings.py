@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-+pjy9-%=sbue##62)7f&j%!ab9&lz12c(*m^60^jnwibzxqxol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['base_apmo.onrender.com']
+ALLOWED_HOSTS = ['apmobackend.onrender.com']
 
 # Application definition
 
