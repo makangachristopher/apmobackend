@@ -83,12 +83,12 @@ def loginPage(request):
 def home(request):
     sermons = Sermon.objects.all()
     total_sermons = Sermon.objects.count()
-    total_audio_sermons = Sermon.objects.filter(~Q(audio_file_url="")).count()
+    # total_audio_sermons = Sermon.objects.filter(~Q(audio_file_url="")).count()
 
     context = {
         'sermons': sermons,
         'total_sermons': total_sermons,
-        'total_audio_sermons': total_audio_sermons
+        # 'total_audio_sermons': total_audio_sermons
     }
     return render(request, "dashboard.html", context)
 

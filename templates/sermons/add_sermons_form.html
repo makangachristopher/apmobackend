@@ -17,11 +17,13 @@
             <div class="input-containter">
                 <label class="input-label" for="preacher">Preacher: </label>
                 <select class="input" id="preacher" name="preacher" required>
+                    <option value="" disabled selected hidden>Choose a preacher</option>
                     {% for preacher in preachers %}
                     <option value="{{ preacher.id }}">{{ preacher.name }}</option>
                     {% endfor %}
                 </select>
             </div>
+
 
             <!-- Duration Field -->
             <div class="input-containter">
@@ -35,10 +37,10 @@
                 <input class="input" id="date_published" name="date_published" type="date" required />
             </div>
 
-            <!-- Audio File URL Field -->
-            <div class="input-containter">
-                <label class="input-label" for="audio_file_url">Audio File URL: </label>
-                <input class="input" id="audio_file_url" name="audio_file_url" type="url" required />
+            <!-- Audio File -->
+            <div class="input-container">
+                <label class="input-label" for="audio_file">Audio File:</label>
+                <input class="input" id="audio_file" name="audio_file" type="file" accept="audio/*" required />
             </div>
 
             <!-- Description Field -->
@@ -57,6 +59,7 @@
             <div class="input-containter">
                 <label class="input-label" for="category">Category: </label>
                 <select class="input" id="category" name="category" required>
+                    <option value="" disabled selected hidden>Choose a category</option>
                     {% for category in categories %}
                     <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
@@ -67,6 +70,7 @@
             <div class="input-containter">
                 <label class="input-label" for="playlists">Playlists: </label>
                 <select class="input" id="playlists" name="playlists" required>
+                    <option value="" disabled selected hidden>Choose a playlist</option>
                     {% for playlist in playlists %}
                     <option value="{{ playlist.id }}">{{ playlist.name }}</option>
                     {% endfor %}

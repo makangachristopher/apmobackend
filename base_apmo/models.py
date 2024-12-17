@@ -12,7 +12,7 @@ class Sermon(models.Model):
     )
     duration = models.DurationField(verbose_name=_("Duration"))  # Store duration in HH:MM:SS format
     date_published = models.DateField(verbose_name=_("Date Published"))
-    audio_file_url = models.URLField(verbose_name=_("Audio File URL"))
+    audio_file = models.FileField(upload_to='audio/sermons/', verbose_name=_("Audio File"), null=True, blank=True)
     description = models.TextField(verbose_name=_("Description"))
     topic = models.CharField(max_length=255, verbose_name=_("Topic"))
     category = models.ForeignKey(
