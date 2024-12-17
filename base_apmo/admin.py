@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Preacher, Playlist, Sermon, Events, Download, Bookmark, Favourite
+from .models import Category, Preacher, Playlist, Sermon, Events, Download, Bookmark, Favourite, Devotion
 # Register your models here.
 
 admin.site.register(Category)
@@ -10,3 +10,4 @@ admin.site.register(Events)
 admin.site.register(Download)
 admin.site.register(Favourite)
 admin.site.register(Bookmark)
+admin.site.register(Devotion)
