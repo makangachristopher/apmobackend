@@ -8,7 +8,7 @@ from .views import SermonListView
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('login/', views.loginPage, name='login'),
+    path('accounts/login/', views.loginPage, name='login'),
     path('logout/', views.logoutUser, name='logout'),
     path("signup/", views.signup, name="signup"),
     path("categories/", views.categories, name="categories"),
