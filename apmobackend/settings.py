@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+pjy9-%=sbue##62)7f&j%!ab9&lz12c(*m^60^jnwibzxqxol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://127.0.0.1:8000/', 'localhost']
 
 
 # Application definition
@@ -144,3 +144,9 @@ REST_FRAMEWORK = {
     'rest_framework.renderers.JSONRenderer',
     ),
 }
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:8000",
+    "http://127.0.0.1:8000",  # Add this if you're also testing on http
+]

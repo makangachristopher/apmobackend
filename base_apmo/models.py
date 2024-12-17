@@ -49,6 +49,17 @@ class Preacher(models.Model):
         return self.name
 
 
+class Devotion(models.Model):
+    title = models.CharField(max_length=255)
+    theme_scripture = models.CharField(max_length=255)
+    content = models.TextField()
+    devotion_thumbnail = models.ImageField(upload_to='images/devotions/', null=True, blank=True)
+  
+    def __str__(self):
+        return self.name
+    
+
+
 class Playlist(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -60,3 +71,44 @@ class Playlist(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+class Download(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sermon = models.ForeignKey(Sermon, on_delete=models.CASCADE)
+    download_date = models.DateTimeField(auto_now_add=True)
+
+    def to_plain_object(self):
+        return {
+            "id": self.id,
+            "user": self.user.username,
+            "sermon": self.sermon.title,
+            "download_date": self.download_date,
+        }
+
+    def __str__(self):
+        return f"{self.user.username} downloaded {self.sermon.title}"
+
+class Favourite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sermon = models.ForeignKey(Sermon, on_delete=models.CASCADE)
+    favourited_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} favourited {self.sermon.title}"
+
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    sermon = models.ForeignKey(Sermon, on_delete=models.CASCADE)
+    bookmarked_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} bookmarked {self.sermon.title}"
+
+class Events(models.Model):
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+    date = models.DateField(verbose_name=_("Date Published"))
+    description = models.TextField(verbose_name=_("Description"))
+    link = models.CharField(max_length=255, verbose_name=_("Topic"))
+    event_thumbnail = models.ImageField(upload_to='images/events/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.title}"
